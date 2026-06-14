@@ -6,25 +6,28 @@ import os
 class HistoryManager:
 
     def __init__(self):
-        self.Filename = "History.json"
+        self.FileName = "History.json"
 
     #Save calculation to history
     def SaveCalculation(self, Calculation):
         History = self.LoadHistory()
         History.append(Calculation)
         
-        with open(self.Filename, "w") as File:
+        with open(self.FileName, "w") as File:
             json.dump(History, File, indent=4)
 
     #Load history from file
     def LoadHistory(self):
-        if not os.path.exists(self.Filename):
+        if not os.path.exists(self.FileName):
             return []
 
-        with open(self.Filename, "r") as File:
-            return json.load(File)
+        try:
+            with open(self.FileName, "r") as File:
+                return json.load(File)
+        except json.JSONDecodeError:
+            return []
 
     #Clear your calculation history
     def ClearHistory(self):
-        with open(self.Filename, "w") as File:
+        with open(self.FileName, "w") as File:
             json.dump([], File)
