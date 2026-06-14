@@ -16,5 +16,5 @@ class Calculator:
     #Division function
     def Divide(self, A, B):
         if B == 0:
-            raise ValueError("Delen door nul is niet toegestaan.")
+            raise ValueError("You cannot divide by zero.")
         return A / B
